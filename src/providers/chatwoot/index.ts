@@ -34,6 +34,12 @@ export const updateContact = async (id: number, data: any, accountId: number) =>
 };
 
 export const createContact = async (phoneNumber: string, inboxId: number, accountId: number, name?: string) => {
+  if (phoneNumber.startsWith("52") && phoneNumber.length === 13) {
+    phoneNumber = `+${phoneNumber.slice(0, 2)}${phoneNumber.slice(3)}`;
+  } else if (phoneNumber.startsWith("54") && phoneNumber.length === 13) {
+    phoneNumber = `+${phoneNumber.slice(0, 2)}${phoneNumber.slice(3)}`;
+  }
+
   const create = await client.contacts.create({
     accountId,
     data: {
